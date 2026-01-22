@@ -65,7 +65,7 @@ Akses API:
 - Validasi dilakukan di backend
 - PIN disimpan di environment variable
 
-###❗ Catatan Penting
+### ❗ Catatan Penting
 
 - Pastikan PostgreSQL aktif
 - Pastikan database sudah dibuat
