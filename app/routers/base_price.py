@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.dependencies.pin_auth import verify_pin
 from app.models.base_price import BasePrice
 from app.models.product import Product
 from app.models.supplier import Supplier
@@ -11,7 +10,6 @@ from app.schemas.base_price import BasePriceCreate, BasePriceResponse, BasePrice
 router = APIRouter(
     prefix="/base-prices",
     tags=["Base Prices"],
-    dependencies=[Depends(verify_pin)]
 )
 
 @router.post("/", response_model=BasePriceResponse)

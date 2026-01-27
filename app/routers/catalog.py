@@ -5,10 +5,9 @@ from app.models.product import Product
 from app.models.base_price import BasePrice
 from app.models.sell_price import SellPrice
 from app.models.supplier import Supplier
-from app.dependencies.pin_auth import verify_pin
 from sqlalchemy import or_
 
-router = APIRouter(prefix="/catalog", tags=["Catalog"], dependencies=[Depends(verify_pin)])
+router = APIRouter(prefix="/catalog", tags=["Catalog"])
 
 @router.get("/search")
 def search_product(q: str, db: Session = Depends(get_db)):
@@ -88,6 +87,7 @@ def get_all_catalog(db: Session = Depends(get_db)):
             "code": product.code,
             "name": product.name,
             "sell_price": {
+                "id": sell_price.id,
                 "price": sell_price.price,
                 "unit": sell_price.unit
             } if sell_price else None,

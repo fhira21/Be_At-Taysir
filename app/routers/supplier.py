@@ -1,11 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.dependencies.pin_auth import verify_pin
 from app.models.supplier import Supplier
 from app.schemas.supplier import SupplierCreate, SupplierResponse, SupplierUpdateSchema
 
-router = APIRouter(prefix="/suppliers", tags=["Suppliers"],dependencies=[Depends(verify_pin)])
+router = APIRouter(prefix="/suppliers", tags=["Suppliers"])
 
 @router.post("/", response_model=SupplierResponse)
 def create_supplier(data: SupplierCreate, db: Session = Depends(get_db)):

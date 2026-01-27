@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.dependencies.pin_auth import verify_pin
 from app.models.sell_price import SellPrice
 from app.models.product import Product
 from app.schemas.sell_price import SellPriceCreate, SellPriceResponse, SellPriceUpdateSchema
@@ -10,7 +9,6 @@ from app.schemas.sell_price import SellPriceCreate, SellPriceResponse, SellPrice
 router = APIRouter(
     prefix="/sell-prices",
     tags=["Sell Prices"],
-    dependencies=[Depends(verify_pin)]
 )
 
 @router.post("/", response_model=SellPriceResponse)

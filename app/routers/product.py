@@ -3,11 +3,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.dependencies.pin_auth import verify_pin
 from app.models.product import Product
 from app.schemas.product import ProductCreate, ProductResponse, ProductUpdateSchema
 
-router = APIRouter(prefix="/products", tags=["Products"], dependencies=[Depends(verify_pin)])
+router = APIRouter(prefix="/products", tags=["Products"])
 
 @router.post("/", response_model=ProductResponse)
 def create_product(data: ProductCreate, db: Session = Depends(get_db)):

@@ -12,6 +12,10 @@ from app.routers import sell_price
 from app.routers import base_price
 from app.routers import catalog
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 app = FastAPI()
 
 app.include_router(product.router)
@@ -20,6 +24,13 @@ app.include_router(sell_price.router)
 app.include_router(base_price.router)
 app.include_router(catalog.router)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # untuk development
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 Base.metadata.create_all(bind=engine)
 
 @app.get("/")
